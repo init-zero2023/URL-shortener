@@ -26,12 +26,11 @@ app.get('/:shortUrl', async(req, res) => {
     const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
     if (shortUrl == null)
         res.sendStatus(404);
-
     else {
         shortUrl.clicks++;
         shortUrl.save();
+        res.redirect(shortUrl.full);
     }
-    res.redirect(shortUrl.full);
 });
 
 
