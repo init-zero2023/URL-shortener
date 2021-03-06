@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const ShortUrl = require('./models/shortUrl');
 
 const app = express();
-mongoose.connect('mongodb://localhost/urlShortener', {
+mongoose.connect('mongodb+srv://admin-santosh:2019UCO1523@mycluster.1xj5o.mongodb.net/URlshortener?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -31,6 +31,13 @@ app.get('/:shortUrl', async(req, res) => {
     res.redirect(shortUrl.full);
 });
 
-app.listen(3000 || process.env.PORT, () => {
-    console.log("Port is listening at port 3000");
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+
+
+app.listen(port, () => {
+    console.log("Port is listening at port");
 });
